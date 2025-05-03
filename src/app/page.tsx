@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import MenuToggle from "../app/components/Hamburger";
@@ -7,6 +7,7 @@ import { useState } from "react";
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [activeTab, setActiveTab] = useState("Home");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -16,7 +17,6 @@ export default function Home() {
     setActiveTab(tab);
   };
 
-  // Sample video data with Lorem Ipsum and fake images
   const videos = [
     {
       id: 1,
@@ -62,6 +62,11 @@ export default function Home() {
     },
   ];
 
+  const filteredVideos = videos.filter((video) =>
+    video.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    video.channel.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="container flex flex-row w-[100vw] h-[100vh] min-h-screen bg-[#0f0f0f]">
       <div className="flex flex-col h-full">
@@ -106,6 +111,8 @@ export default function Home() {
               <input
                 type="text"
                 placeholder="Search videos..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full py-3 pl-12 pr-4 rounded-full bg-[#1a1a1a] text-white text-lg border-2 border-[#2a0d4f] focus:border-[#6b21a8] focus:ring-2 focus:ring-[#6b21a8] focus:outline-none transition-all duration-300"
               />
               <svg
@@ -129,29 +136,35 @@ export default function Home() {
         <main className="flex-1 overflow-y-auto p-6">
           {activeTab === "Home" ? (
             <div className="grid grid-cols-3 gap-4">
-              {videos.map((video) => (
-                <div
-                  key={video.id}
-                  className="bg-[#1a1a1a] rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-200"
-                >
-                  <div className="relative w-full h-40">
-                    <Image
-                      src={video.thumbnail}
-                      alt={video.title}
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded-t-lg"
-                    />
+              {filteredVideos.length > 0 ? (
+                filteredVideos.map((video) => (
+                  <div
+                    key={video.id}
+                    className="bg-[#1a1a1a] rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-200"
+                  >
+                    <div className="relative w-full h-40">
+                      <Image
+                        src={video.thumbnail}
+                        alt={video.title}
+                        layout="fill"
+                        objectFit="cover"
+                        className="rounded-t-lg"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="text-white text-base font-semibold line-clamp-2">
+                        {video.title}
+                      </h3>
+                      <p className="text-gray-400 text-sm mt-1">{video.channel}</p>
+                      <p className="text-gray-500 text-sm mt-1">{video.views}</p>
+                    </div>
                   </div>
-                  <div className="p-4">
-                    <h3 className="text-white text-base font-semibold line-clamp-2">
-                      {video.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm mt-1">{video.channel}</p>
-                    <p className="text-gray-500 text-sm mt-1">{video.views}</p>
-                  </div>
+                ))
+              ) : (
+                <div className="col-span-3 text-center text-gray-400">
+                  No videos found matching your search.
                 </div>
-              ))}
+              )}
             </div>
           ) : (
             <div className="p-4 text-white">
