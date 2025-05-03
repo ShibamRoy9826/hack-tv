@@ -1,28 +1,45 @@
+"use client"
+
 import Image from "next/image";
 import MenuToggle from "../app/components/Hamburger";
+import { useState } from "react";
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="container flex flex-row w-[100vw] h-[100vh] min-h-screen">
-      <div className="w-[12vw] h-full ">
-        <div className="w-full h-full flex items-center justify-center">
-        {/* <button className="group h-20 w-20 rounded-lg outline-0 ">
-          <div className="grid justify-items-center gap-1.5">
-            <span className="h-1 w-12 rounded-full bg-white"></span>
-            <span className="h-1 w-12 rounded-full bg-white"></span>
-            <span className="h-1 w-12 rounded-full bg-white"></span>
-          </div>
-        </button> */}
-        <MenuToggle/>
+      <div className="flex flex-col h-full">
+        <div className="w-[12vw] h-16 flex items-center justify-center bg-[#1a1a1a] border-b border-[#2a0d4f] z-20">
+          <MenuToggle isActive={isMenuOpen} toggleMenu={toggleMenu} />
         </div>
-        
-        <ul className="flex flex-col justify-center items-start pl-6 mt-16">
-          <li className="bold font-family py-6 my-2 px-2 text-xl selected w-full rounded-2xl text-center cursor-pointer">Home</li>
-          <li className="bold font-family py-6 my-2 px-2 text-xl w-full rounded-2xl text-center hover:bg-[#2a0d4f] duration-400 cursor-pointer">My Videos</li>
-          <li className="bold font-family py-6 my-2 px-2 text-xl w-full rounded-2xl text-center hover:bg-[#2a0d4f] duration-400 cursor-pointer">My Favs</li>
-          <li className="bold font-family py-6 my-2 px-2 text-xl w-full rounded-2xl text-center hover:bg-[#2a0d4f] duration-400 cursor-pointer">Settings</li>
-          <li className="bold font-family py-6 my-2 px-2 text-xl w-full rounded-2xl text-center hover:bg-[#2a0d4f] duration-400 cursor-pointer">Profile</li>
-        </ul>
+        <div 
+          className={`w-[12vw] h-full bg-[#1a1a1a] transition-all duration-300 shadow-lg absolute top-16 left-0 ${
+            isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
+          <ul className="flex flex-col justify-start items-start pl-4 pr-2 pt-8 h-full">
+            <li className="w-full font-bold text-lg py-3 px-4 my-1 rounded-xl text-white bg-[#2a0d4f] cursor-pointer transition-colors duration-200">
+              Home
+            </li>
+            <li className="w-full font-bold text-lg py-3 px-4 my-1 rounded-xl text-gray-300 hover:bg-[#2a0d4f] hover:text-white cursor-pointer transition-colors duration-200">
+              My Videos
+            </li>
+            <li className="w-full font-bold text-lg py-3 px-4 my-1 rounded-xl text-gray-300 hover:bg-[#2a0d4f] hover:text-white cursor-pointer transition-colors duration-200">
+              My Favs
+            </li>
+            <li className="w-full font-bold text-lg py-3 px-4 my-1 rounded-xl text-gray-300 hover:bg-[#2a0d4f] hover:text-white cursor-pointer transition-colors duration-200">
+              Settings
+            </li>
+            <li className="w-full font-bold text-lg py-3 px-4 my-1 rounded-xl text-gray-300 hover:bg-[#2a0d4f] hover:text-white cursor-pointer transition-colors duration-200">
+              Profile
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div className="flex flex-col flex-1 h-full">
