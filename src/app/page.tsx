@@ -6,9 +6,14 @@ import { useState } from "react";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [activeTab, setActiveTab] = useState("Home");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
   };
 
   return (
@@ -23,21 +28,19 @@ export default function Home() {
           }`}
         >
           <ul className="flex flex-col justify-start items-start pl-4 pr-2 pt-8 h-full">
-            <li className="w-full font-bold text-lg py-3 px-4 my-1 rounded-xl text-white bg-[#2a0d4f] cursor-pointer transition-colors duration-200">
-              Home
-            </li>
-            <li className="w-full font-bold text-lg py-3 px-4 my-1 rounded-xl text-gray-300 hover:bg-[#2a0d4f] hover:text-white cursor-pointer transition-colors duration-200">
-              My Videos
-            </li>
-            <li className="w-full font-bold text-lg py-3 px-4 my-1 rounded-xl text-gray-300 hover:bg-[#2a0d4f] hover:text-white cursor-pointer transition-colors duration-200">
-              My Favs
-            </li>
-            <li className="w-full font-bold text-lg py-3 px-4 my-1 rounded-xl text-gray-300 hover:bg-[#2a0d4f] hover:text-white cursor-pointer transition-colors duration-200">
-              Settings
-            </li>
-            <li className="w-full font-bold text-lg py-3 px-4 my-1 rounded-xl text-gray-300 hover:bg-[#2a0d4f] hover:text-white cursor-pointer transition-colors duration-200">
-              Profile
-            </li>
+            {["Home", "My Videos", "My Favs", "Settings", "Profile"].map((tab) => (
+              <li
+                key={tab}
+                onClick={() => handleTabClick(tab)}
+                className={`w-full font-bold text-lg py-3 px-4 my-1 rounded-xl cursor-pointer transition-colors duration-200 ${
+                  activeTab === tab
+                    ? 'text-white bg-[#2a0d4f]'
+                    : 'text-gray-300 hover:bg-[#2a0d4f] hover:text-white'
+                }`}
+              >
+                {tab}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -77,7 +80,33 @@ export default function Home() {
           </div>
         </div>
 
-        <main className="flex-1"></main>
+        <main className="flex-1">
+          <div className="p-4 text-white">
+            <h1 className="text-2xl font-bold">{activeTab} Content</h1>
+            <p>This is the {activeTab} section.</p>
+          </div>
+        </main>
+      </div>
+
+      <div 
+        className={`w-[12vw] h-full bg-[#1a1a1a] transition-all duration-300 shadow-lg absolute top-0 right-0 ${
+          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <ul className="flex flex-col justify-start items-start pl-4 pr-2 pt-16 h-full">
+          <li className="w-full font-bold text-lg py-3 px-4 my-1 rounded-xl text-gray-300 hover:bg-[#2a0d4f] hover:text-white cursor-pointer transition-colors duration-200">
+            Notifications
+          </li>
+          <li className="w-full font-bold text-lg py-3 px-4 my-1 rounded-xl text-gray-300 hover:bg-[#2a0d4f] hover:text-white cursor-pointer transition-colors duration-200">
+            Watch Later
+          </li>
+          <li className="w-full font-bold text-lg py-3 px-4 my-1 rounded-xl text-gray-300 hover:bg-[#2a0d4f] hover:text-white cursor-pointer transition-colors duration-200">
+            Playlists
+          </li>
+          <li className="w-full font-bold text-lg py-3 px-4 my-1 rounded-xl text-gray-300 hover:bg-[#2a0d4f] hover:text-white cursor-pointer transition-colors duration-200">
+            History
+          </li>
+        </ul>
       </div>
     </div>
   );
