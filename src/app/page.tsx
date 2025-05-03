@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-row bg-[#110A10] w-[100vw] h-[100vh]">
+    <div className="container flex flex-row w-[100vw] h-[100vh] min-h-screen">
       <div className="w-[12vw] h-full px-8">
         <button className="ml-8 mt-8">X</button>
         <ul className="flex flex-col justify-center items-start pl-6 mt-16">
@@ -14,7 +14,7 @@ export default function Home() {
         </ul>
       </div>
 
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 h-full">
         <div className="h-[5vw] w-full flex justify-center items-center">
           <div className="flex items-center">
             <div className="w-[4vw] h-[4vw]">
@@ -49,7 +49,7 @@ export default function Home() {
           </div>
         </div>
 
-        <main></main>
+        <main className="flex-1"></main>
       </div>
     </div>
   );
