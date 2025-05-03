@@ -1,10 +1,21 @@
 import Image from "next/image";
+import MenuToggle from "../app/components/Hamburger";
 
 export default function Home() {
   return (
     <div className="container flex flex-row w-[100vw] h-[100vh] min-h-screen">
-      <div className="w-[12vw] h-full px-8">
-        <button className="ml-8 mt-8">X</button>
+      <div className="w-[12vw] h-full ">
+        <div className="w-full h-full flex items-center justify-center">
+        {/* <button className="group h-20 w-20 rounded-lg outline-0 ">
+          <div className="grid justify-items-center gap-1.5">
+            <span className="h-1 w-12 rounded-full bg-white"></span>
+            <span className="h-1 w-12 rounded-full bg-white"></span>
+            <span className="h-1 w-12 rounded-full bg-white"></span>
+          </div>
+        </button> */}
+        <MenuToggle/>
+        </div>
+        
         <ul className="flex flex-col justify-center items-start pl-6 mt-16">
           <li className="bold font-family py-6 my-2 px-2 text-xl selected w-full rounded-2xl text-center cursor-pointer">Home</li>
           <li className="bold font-family py-6 my-2 px-2 text-xl w-full rounded-2xl text-center hover:bg-[#2a0d4f] duration-400 cursor-pointer">My Videos</li>
