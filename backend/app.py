@@ -1,4 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 import os
 
 from signup import router as signup_router
@@ -9,9 +11,11 @@ app = FastAPI()
 app.include_router(signup_router)
 app.include_router(login_router)
 
-@app.get("/")
-async def root():
-    return {"message": "Hello, FastAPI on the specified port!"}
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/", response_class=HTMLResponse)
+async def root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 def get_port_from_file(file_path=".env") -> int:
     """
