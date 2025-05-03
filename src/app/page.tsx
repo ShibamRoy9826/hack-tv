@@ -16,10 +16,56 @@ export default function Home() {
     setActiveTab(tab);
   };
 
+  // Sample video data with Lorem Ipsum and fake images
+  const videos = [
+    {
+      id: 1,
+      title: "Lorem Ipsum Dolor Sit",
+      channel: "Amet Consectetur",
+      views: "1.2M views",
+      thumbnail: "https://placehold.co/320x180?text=Video+1",
+    },
+    {
+      id: 2,
+      title: "Sit Amet Consectetur",
+      channel: "Adipiscing Elit",
+      views: "850K views",
+      thumbnail: "https://placehold.co/320x180?text=Video+2",
+    },
+    {
+      id: 3,
+      title: "Dolor Sit Amet",
+      channel: "Sed Do Eiusmod",
+      views: "600K views",
+      thumbnail: "https://placehold.co/320x180?text=Video+3",
+    },
+    {
+      id: 4,
+      title: "Consectetur Adipiscing",
+      channel: "Tempor Incididunt",
+      views: "950K views",
+      thumbnail: "https://placehold.co/320x180?text=Video+4",
+    },
+    {
+      id: 5,
+      title: "Ipsum Dolor Sit",
+      channel: "Labore et Dolore",
+      views: "1.5M views",
+      thumbnail: "https://placehold.co/320x180?text=Video+5",
+    },
+    {
+      id: 6,
+      title: "Amet Consectetur",
+      channel: "Magna Aliqua",
+      views: "700K views",
+      thumbnail: "https://placehold.co/320x180?text=Video+6",
+    },
+  ];
+
   return (
-    <div className="container flex flex-row w-[100vw] h-[100vh] min-h-screen">
+    <div className="container flex flex-row w-[100vw] h-[100vh] min-h-screen bg-[#0f0f0f]">
       <div className="flex flex-col h-full">
-        <div className="w-[12vw] h-16 flex items-center justify-center bg-[#1a1a1a] border-b border-[#2a0d4f] z-20">
+        <div className="w-[12vw] h-16 flex items-center justify-center border-b border-[#2a0d4f] z-20">
           <MenuToggle isActive={isMenuOpen} toggleMenu={toggleMenu} />
         </div>
         <div 
@@ -80,11 +126,39 @@ export default function Home() {
           </div>
         </div>
 
-        <main className="flex-1">
-          <div className="p-4 text-white">
-            <h1 className="text-2xl font-bold">{activeTab} Content</h1>
-            <p>This is the {activeTab} section.</p>
-          </div>
+        <main className="flex-1 overflow-y-auto p-6">
+          {activeTab === "Home" ? (
+            <div className="grid grid-cols-3 gap-4">
+              {videos.map((video) => (
+                <div
+                  key={video.id}
+                  className="bg-[#1a1a1a] rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-200"
+                >
+                  <div className="relative w-full h-40">
+                    <Image
+                      src={video.thumbnail}
+                      alt={video.title}
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded-t-lg"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-white text-base font-semibold line-clamp-2">
+                      {video.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm mt-1">{video.channel}</p>
+                    <p className="text-gray-500 text-sm mt-1">{video.views}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="p-4 text-white">
+              <h1 className="text-2xl font-bold">{activeTab} Content</h1>
+              <p>This is the {activeTab} section.</p>
+            </div>
+          )}
         </main>
       </div>
 
