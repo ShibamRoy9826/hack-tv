@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import MenuToggle from "../app/components/Hamburger";
+import RingBG from "../app/components/RingBG";
 import { useState } from "react";
 
 export default function Home() {
@@ -60,6 +61,50 @@ export default function Home() {
       views: "700K views",
       thumbnail: "https://placehold.co/320x180?text=Video+6",
     },
+    {
+      id: 7,
+      title: "Amet Consectetur",
+      channel: "Magna Aliqua",
+      views: "700K views",
+      thumbnail: "https://placehold.co/320x180?text=Video+6",
+    },
+    {
+      id: 8,
+      title: "Amet Consectetur",
+      channel: "Magna Aliqua",
+      views: "700K views",
+      thumbnail: "https://placehold.co/320x180?text=Video+6",
+    },
+    {
+      id: 9,
+      title: "Amet Consectetur",
+      channel: "Magna Aliqua",
+      views: "700K views",
+      thumbnail: "https://placehold.co/320x180?text=Video+6",
+    },
+    {
+      id: 10,
+      title: "Amet Consectetur",
+      channel: "Magna Aliqua",
+      views: "700K views",
+      thumbnail: "https://placehold.co/320x180?text=Video+6",
+    },
+    {
+      id: 11,
+      title: "Amet Consectetur",
+      channel: "Magna Aliqua",
+      views: "700K views",
+      thumbnail: "https://placehold.co/320x180?text=Video+6",
+    },
+    {
+      id: 12,
+      title: "Amet Consectetur",
+      channel: "Magna Aliqua",
+      views: "700K views",
+      thumbnail: "https://placehold.co/320x180?text=Video+6",
+    },
+   
+
   ];
 
   const filteredVideos = videos.filter((video) =>
@@ -68,13 +113,15 @@ export default function Home() {
   );
 
   return (
-    <div className="container flex flex-row w-[100vw] h-[100vh] min-h-screen bg-[#0f0f0f]">
+    
+    <div className="container flex flex-row w-[100vw] h-[100vh] min-h-screen  z-2">
+      <RingBG />
       <div className="flex flex-col h-full">
-        <div className="w-[12vw] h-16 flex items-center justify-center border-b border-[#2a0d4f] z-20">
+        <div className="w-[12vw] h-16 flex items-center justify-center z-20">
           <MenuToggle isActive={isMenuOpen} toggleMenu={toggleMenu} />
         </div>
         <div 
-          className={`w-[12vw] h-full bg-[#1a1a1a] transition-all duration-300 shadow-lg absolute top-16 left-0 ${
+          className={`w-[12vw] h-full bg-[#130d1c] rounded-2xl transition-all duration-300 shadow-lg fixed top-16 left-0 ${
             isMenuOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
@@ -85,7 +132,7 @@ export default function Home() {
                 onClick={() => handleTabClick(tab)}
                 className={`w-full font-bold text-lg py-3 px-4 my-1 rounded-xl cursor-pointer transition-colors duration-200 ${
                   activeTab === tab
-                    ? 'text-white bg-[#2a0d4f]'
+                    ? 'text-[#130d1c] bg-[#9546fc]'
                     : 'text-gray-300 hover:bg-[#2a0d4f] hover:text-white'
                 }`}
               >
@@ -96,10 +143,10 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex flex-col flex-1 h-full">
+      <div className="flex flex-col flex-1 h-full ">
         <div className="h-[5vw] w-full flex justify-center items-center">
-          <div className="flex items-center">
-            <div className="w-[4vw] h-[4vw]">
+          <div className="flex items-center z-2">
+            <div className="w-[4vw] h-[4vw] float-left mr-24">
               <Image
                 src="/logo.png"
                 alt="HackTV logo"
@@ -133,14 +180,14 @@ export default function Home() {
           </div>
         </div>
 
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-6 z-2">
           {activeTab === "Home" ? (
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-4 z-2">
               {filteredVideos.length > 0 ? (
                 filteredVideos.map((video) => (
                   <div
                     key={video.id}
-                    className="bg-[#1a1a1a] rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-200"
+                    className="bg-[#130d1c] rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-200 z-2 vid"
                   >
                     <div className="relative w-full h-40">
                       <Image
@@ -176,7 +223,7 @@ export default function Home() {
       </div>
 
       <div 
-        className={`w-[12vw] h-full bg-[#1a1a1a] transition-all duration-300 shadow-lg absolute top-0 right-0 ${
+        className={`w-[12vw] h-full bg-[#130d1c] transition-all duration-300 shadow-lg absolute top-0 right-0 ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
